@@ -1,0 +1,32 @@
+v 0.1.30
+=====================================================================
++ Added support for win32 systems. Subprocess module is now used for executing commands (Thanks to John Hoyt for the patch)
++ Minor prompt changes
+
+v 0.1.25
+=====================================================================
++ Added some error handling
++ Added source code comments
++ Default polling time is now normal = 60 secs between polls
++ Code clean up
+
+v 0.1.22
+=====================================================================
++ Encryption password is now a SHA hash of password+salt to avoid
+  weak key scheduling related to ARC4. See http://en.wikipedia.org/wiki/ARC4#Security
+
+v 0.1.21b
+=====================================================================
++ Fixed wrong calculations of expected time of execution
++ Fixed bug ignoring specified polling type widn ids-flag was set
+
+v 0.1.2
+=====================================================================
++ Empty commands are not interpreted as input on server mode
++ Small output fixes
++ Password prompt now specifies host to avoid confusion with standard
+  sudo password prompt
+
+v 0.1.1
+=====================================================================
++ First stable release
